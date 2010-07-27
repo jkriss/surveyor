@@ -32,12 +32,13 @@
           %th
             &nbsp;
       %tbody
-        %tr
-          - (response_set.count_group_responses(group_questions) + 1).times do |group_number|     
+        - (response_set.count_group_responses(group_questions) + 1).times do |group_number|     
+          %tr
             - group_questions.each do |question|
               %td
                 =render(:partial => question.custom_renderer || "/partials/question", :locals => locals.merge({:question => question, :response_group => group_number, :disabled => false, :hide_label => false}))
-            %td=group_number + 1
+            %td
+              =group_number + 1
             
         %tr
           - group_questions.each do |question|
