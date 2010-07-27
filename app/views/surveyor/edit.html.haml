@@ -10,7 +10,7 @@
   - form_tag(update_my_survey_path, :method => :put, :id => "survey_form", :class => @survey.custom_class) do
     = hidden_field_tag :current_section_id, @section.id
     - unless @sections.size < 2
-      #menu
+      .menu
         Sections:
         %ul
           - @sections.each do |s|
@@ -21,7 +21,7 @@
               = menu_button_for(s)
     .previous_section= previous_section
     - unless @dependents.empty?
-      #dependents
+      .dependents
         .title Follow-up questions from your answers on the previous page
         -# @dependents.each_with_index do |question, index|
           = dependency_explanation_helper(question, @response_set)

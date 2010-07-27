@@ -1,8 +1,8 @@
 #surveyor
-  #header
+  .header
     .title= surveyor_config['default.title'] || "You can take these surveys:"
   %br
-  #survey_list
+  .survey_list
     %ul
       - unless @surveys.empty?
         - @surveys.each do |survey|
