@@ -34,12 +34,13 @@
       %span.text= split_text(question.text)[:postfix]
 - when :repeater_default, :repeater_dropdown
   - disabled ||= false
+  - hide_label ||= true
   - div_for question, :class => "#{disabled ? 'dis' : 'en'}abled #{question.css_class(response_set)}" do
-    %span.text= question.text
-    %span.help= question.help_text
+    -unless hide_label
+      %span.text= question.text
+      %span.help= question.help_text
     = hidden_field_tag("response_groups[#{question.id}][#{response_group}][response_group]", response_group)
     = hidden_field_tag("response_groups[#{question.id}][#{response_group}][question_id]", question.id)
-    %br
     %ol.answers
       - if renderer == :repeater_default  
         - question.answers.each do |answer|
