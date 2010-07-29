@@ -12,9 +12,11 @@ module SurveyorHelper
   def surveyor_includes
     surveyor_stylsheets + surveyor_javascripts    
   end
+
   def surveyor_stylsheets
     stylesheet_link_tag 'surveyor/reset', 'surveyor/surveyor', 'surveyor/ui.theme.css','surveyor/jquery-ui-slider-additions'
   end
+  
   def surveyor_javascripts
     javascript_include_tag 'surveyor/selectToUISlider.jQuery','surveyor/jquery.form.js', 'surveyor/surveyor.js'
   end
@@ -29,18 +31,21 @@ module SurveyorHelper
     end
     "&nbsp;&nbsp;You answered &quot;#{trigger_responses.join("&quot; and &quot;")}&quot; to the question &quot;#{dependent_questions.map(&:text).join("&quot;,&quot;")}&quot;"
   end
+  
   def menu_button_for(section)
     submit_tag(section.title, :name => "section[#{section.id}]")
   end
+  
   def previous_section
     # submit_tag("&laquo; Previous section", :name => "section[#{@section.previous.id}]") unless @section.previous.nil?
     # refactored to use copy in memory instead of making extra db calls
-    submit_tag("&laquo; Previous section", :name => "section[#{@sections[@sections.index(@section)-1].id}]") unless @sections.first == @section
+    submit_tag("&lt; Previous", :name => "section[#{@sections[@sections.index(@section)-1].id}]", :class => "awesome regular") unless @sections.first == @section
   end
+  
   def next_section
     # @section.next.nil? ? submit_tag("Click here to finish", :name => "finish") : submit_tag("Next section &raquo;", :name => "section[#{@section.next.id}]")
     # refactored to use copy in memory instead of making extra db calls
-    @sections.last == @section ? submit_tag("Submit", :name => "finish") : submit_tag("Continue", :name => "section[#{@sections[@sections.index(@section)+1].id}]")
+    @sections.last == @section ? submit_tag("Next &gt;", :name => "finish", :class => "awesome large") : submit_tag("Next &gt;", :name => "section[#{@sections[@sections.index(@section)+1].id}]",:class => "awesome large")
   end
   
   # Questions
