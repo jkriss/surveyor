@@ -48,7 +48,7 @@
     = response_form.label(:string_value, split_text(answer.text)[:postfix], :class => "#{(disabled)? 'disabled' : 'enabled'}") unless hide_label
   - when :none_text
     = response_form.label(:text_value, split_text(answer.text)[:prefix]) unless hide_label
-    = response_form.text_area(:text_value, :cols => 80, :rows => 10)
+    = response_form.text_area(:text_value, :cols => 80, :rows => 5)
     = response_form.label(:text_value, split_text(answer.text)[:postfix]) unless hide_label
   - when :none_time
     = response_form.label(:datetime_value, split_text(answer.text)[:prefix], :class => "#{(disabled)? 'disabled' : 'enabled'}") unless hide_label
@@ -56,4 +56,5 @@
     = response_form.label(:datetime_value, split_text(answer.text)[:postfix], :class => "#{(disabled)? 'disabled' : 'enabled'}") unless hide_label
   - else
     = answer.text
+  %span.help=answer.help_text
   
