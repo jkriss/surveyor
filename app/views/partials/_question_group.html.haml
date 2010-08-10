@@ -50,10 +50,10 @@
       - (response_set.count_group_responses(group_questions) + 1).times do |group_number|
         %li.repeater
           - group_questions.each do |question|
-            = render(:partial => question.custom_renderer || "/partials/question", :locals => locals.merge({:question => question, :response_group => group_number, :disabled => false}))
+            = render(:partial => question.custom_renderer || "/partials/question", :locals => locals.merge({:question => question, :response_group => group_number, :disabled => false, :hide_label => false}))
       %li.repeater
         - group_questions.each do |question|
-          = render(:partial => question.custom_renderer || "/partials/question", :locals => locals.merge({:question => question, :response_group => 9999, :disabled => true}))
+          = render(:partial => question.custom_renderer || "/partials/question", :locals => locals.merge({:question => question, :response_group => 9999, :disabled => true, :hide_label => false}))
         = submit_tag("&lt;= add row", :name => "section[#{group_questions.first.survey_section_id}]question_group_#{question_group.id}", :class => "add_row")
   - else # :inline
     %ul

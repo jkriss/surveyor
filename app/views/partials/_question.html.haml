@@ -32,9 +32,9 @@
         .answer{:class => answer.custom_class}= render(:partial => answer.custom_renderer || "/partials/answer", :locals => {:answer => answer, :question => question, :response_obj => @response_set.response_for(question.id, answer.id), :hide_label => true})
     %th.question_postfix
       %span.text= split_text(question.text)[:postfix]
-- when :repeater_default, :repeater_dropdown
-  - disabled ||= false
-  - hide_label ||= true
+- when :repeater_default, :repeater_dropdown, :repeater_ul_default, :repeater_ul_dropdown
+  - disabled = false if disabled.nil?
+  - hide_label = true if hide_label.nil?
   - div_for question, :class => "#{disabled ? 'dis' : 'en'}abled #{question.css_class(response_set)}" do
     -unless hide_label
       %span.text= question.text
@@ -42,7 +42,7 @@
     = hidden_field_tag("response_groups[#{question.id}][#{response_group}][response_group]", response_group)
     = hidden_field_tag("response_groups[#{question.id}][#{response_group}][question_id]", question.id)
     %ol.answers
-      - if renderer == :repeater_default  
+      - if renderer == :repeater_default || renderer == :repeater_ul_default
         - question.answers.each do |answer|
           - content_tag_for :li, answer, :class => answer.custom_class do
             = render(:partial => answer.custom_renderer || "/partials/answer", :locals => {:answer => answer, :question => question, :response_obj => @response_set.response_for(question.id, answer.id, response_group), :response_group => response_group, :hide_label => true, :disabled => disabled})
