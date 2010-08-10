@@ -27,7 +27,8 @@
           = dependency_explanation_helper(question, @response_set)
           = render(:partial => question.custom_renderer || "/partials/question", :locals => {:question => question, :response_set => @response_set, :number => "D#{index+1}"})
     - div_for @section, :class => @section.custom_class do
-      %span.title= @section.title
+      - unless @sections.size < 2
+        %span.title= @section.title
       .questions
         - group_questions ||= []
         - @questions.each_with_index do |question, index|
@@ -40,6 +41,6 @@
               = render(:partial => question.question_group.custom_renderer || "/partials/question_group", :locals => {:question_group => question.question_group, :response_set => @response_set, :group_questions => group_questions})
               - group_questions = []
     .next_section
-      =link_to("Save & Exit",(@current_user.is_a?(Admin) ? administrations_path : dashboard_path))
+      =link_to("Save & Exit",(@current_user.is_a?(Admin) ? administrations_path : dashboard_path),:class => "awesome large")
       =next_section
       
