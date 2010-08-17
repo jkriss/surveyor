@@ -45,7 +45,7 @@ class Question < ActiveRecord::Base
     end
   end
   def css_class(response_set)
-    [(dependent? ? "dependent" : nil), (triggered?(response_set) ? nil : "hidden"), custom_class].compact.join(" ")
+    [(dependent? ? "dependent" : nil), ((triggered?(response_set) || part_of_group?)  ? nil : "hidden"), custom_class].compact.join(" ")
   end
   
   def part_of_group?
