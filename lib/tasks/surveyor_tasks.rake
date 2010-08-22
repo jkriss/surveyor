@@ -20,7 +20,7 @@ namespace :surveyor do
     require 'fixtures_extensions' unless ENV["APPEND"].blank?
     ActiveRecord::Base.establish_connection(Rails.env)
 
-    fixture_dir = File.join(RAILS_ROOT, "surveys", "fixtures")
+    fixture_dir = File.join(RAILS_ROOT, "tmp", "surveys", "fixtures")
     fixtures = Dir.glob("#{fixture_dir}/*.yml")
     raise "No fixtures found." if fixtures.empty?
     

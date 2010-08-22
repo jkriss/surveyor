@@ -36,7 +36,9 @@ module SurveyParser
       self.surveys = []
       self.grid_answers = []
       initialize_counters(@@models)
-      initialize_fixtures(@@models.map(&:pluralize), File.join(RAILS_ROOT, "surveys", "fixtures"))
+      path = File.join(RAILS_ROOT, "tmp", "surveys", "fixtures")
+      FileUtils.mkdir_p path
+      initialize_fixtures(@@models.map(&:pluralize), path)
     end
     
     # @last_survey_id, @last_survey_section_id, etc.
